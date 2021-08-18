@@ -5,18 +5,8 @@ import { IHeadRepository, IMoveHeadDTO } from '../IHeadRepository';
 class HeadRepository implements IHeadRepository {
   private head: Head;
 
-  private static INSTANCE: HeadRepository;
-
-  private constructor() {
+  constructor() {
     this.head = new Head();
-  }
-
-  public static getInstance(): HeadRepository {
-    if (!HeadRepository.INSTANCE) {
-      HeadRepository.INSTANCE = new HeadRepository();
-    }
-
-    return HeadRepository.INSTANCE;
   }
 
   move({ action, movement }: IMoveHeadDTO): void {

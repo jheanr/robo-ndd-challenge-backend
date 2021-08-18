@@ -1,3 +1,5 @@
+import { inject, injectable } from 'tsyringe';
+
 import {
   IHeadRepository,
   IMoveHeadDTO,
@@ -5,8 +7,12 @@ import {
 
 type IRequest = IMoveHeadDTO;
 
+@injectable()
 class MoveHeadUseCase {
-  constructor(private headRepository: IHeadRepository) {}
+  constructor(
+    @inject('HeadRepository')
+    private headRepository: IHeadRepository,
+  ) {}
 
   execute({ action, movement }: IRequest): void {
     if (!this.headRepository.isValidMovement({ action, movement })) {

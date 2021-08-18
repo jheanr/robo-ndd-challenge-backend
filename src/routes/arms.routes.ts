@@ -1,21 +1,17 @@
 import { Router } from 'express';
 
-import { listArmsController } from '../modules/arms/useCases/listArms';
-import { listByArmController } from '../modules/arms/useCases/listByArm';
-import { moveArmController } from '../modules/arms/useCases/moveArm';
+import { ListArmsController } from '../modules/arms/useCases/listArms/ListArmsController';
+import { ListByArmController } from '../modules/arms/useCases/listByArm/ListByArmController';
+import { MoveArmController } from '../modules/arms/useCases/moveArm/MoveArmController';
 
 const armsRoutes = Router();
 
-armsRoutes.post('/', (request, response) => {
-  return moveArmController.handle(request, response);
-});
+const listArmsController = new ListArmsController();
+const listByArmController = new ListByArmController();
+const moveArmController = new MoveArmController();
 
-armsRoutes.get('/:arm', (request, response) => {
-  return listByArmController.handle(request, response);
-});
-
-armsRoutes.get('/', (request, response) => {
-  return listArmsController.handle(request, response);
-});
+armsRoutes.patch('/', moveArmController.handle);
+armsRoutes.get('/:arm', listByArmController.handle);
+armsRoutes.get('/', listArmsController.handle);
 
 export { armsRoutes };

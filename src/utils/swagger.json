@@ -11,10 +11,10 @@
   },
   "paths": {
     "/head": {
-      "post": {
+      "patch": {
         "tags": ["Head"],
         "summary": "Move the head",
-        "description": "Move the head to a new position. By default, both positions(<em>inclination, rotation</em>) starts in <code>em repouso</code>. Each movement must move to the next or previous position, so if the current <code>inclination</code> position is <code>para cima</code>, you're unable to move to <code>para baixo</code> in one request. See <code>schema</code> for details.",
+        "description": "Update the head position to a new one. By default, both positions(<em>inclination, rotation</em>) starts in <code>em repouso</code>. Each movement must move to the next or previous position, so if the current <code>inclination</code> position is <code>para cima</code>, you're unable to move to <code>para baixo</code> in one request. See <code>schema</code> for details.",
         "requestBody": {
           "required": true,
           "content": {
@@ -40,7 +40,7 @@
           }
         },
         "responses": {
-          "201": {
+          "204": {
             "description": "Head moved."
           },
           "500": {
@@ -92,7 +92,7 @@
       }
     },
     "/arms": {
-      "post": {
+      "patch": {
         "tags": ["Arms"],
         "summary": "Move the arm",
         "description": "Move one arm to a new position. By default, both positions(<em>elbow, wrist</em>) starts in <code>em repouso</code>. Each movement must move to the next or previous position, so if the current <code>elbow</code> position is <code>contraído</code>, you're unable to move to <code>em repouso</code> in one request. See <code>schema</code> for details.",
@@ -126,7 +126,7 @@
           }
         },
         "responses": {
-          "201": {
+          "204": {
             "description": "Arm moved."
           },
           "500": {

@@ -1,13 +1,19 @@
+import { inject, injectable } from 'tsyringe';
+
 import { Arm } from '../../models/Arm';
 import { IArmsRepository, IArmTypes } from '../../repositories/IArmsRepository';
 
+@injectable()
 class ListByArmUseCase {
-  constructor(private armsRepository: IArmsRepository) {}
+  constructor(
+    @inject('ArmsRepository')
+    private armsRepository: IArmsRepository,
+  ) {}
 
   execute(arm: IArmTypes): Arm {
-    const response = this.armsRepository.getByArm(arm);
+    const result = this.armsRepository.getByArm(arm);
 
-    return response;
+    return result;
   }
 }
 

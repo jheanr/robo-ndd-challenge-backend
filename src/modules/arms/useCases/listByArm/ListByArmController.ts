@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { container } from 'tsyringe';
 
 import { IArmTypes } from '../../repositories/IArmsRepository';
 import { ListByArmUseCase } from './ListByArmUseCase';
@@ -8,12 +9,12 @@ interface IParams {
 }
 
 class ListByArmController {
-  constructor(private listByArmUseCase: ListByArmUseCase) {}
-
   handle(request: Request, response: Response): Response {
     const { arm } = request.params as unknown as IParams;
 
-    const result = this.listByArmUseCase.execute(arm);
+    const listByArmUseCase = container.resolve(ListByArmUseCase);
+
+    const result = listByArmUseCase.execute(arm);
 
     return response.json(result);
   }

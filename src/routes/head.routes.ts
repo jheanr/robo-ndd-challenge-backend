@@ -1,16 +1,14 @@
 import { Router } from 'express';
 
-import { listHeadController } from '../modules/head/useCases/listHead';
-import { moveHeadController } from '../modules/head/useCases/moveHead';
+import { ListHeadController } from '../modules/head/useCases/listHead/ListHeadController';
+import { MoveHeadController } from '../modules/head/useCases/moveHead/MoveHeadController';
 
 const headRoutes = Router();
 
-headRoutes.post('/', (request, response) => {
-  return moveHeadController.handle(request, response);
-});
+const moveHeadController = new MoveHeadController();
+const listHeadController = new ListHeadController();
 
-headRoutes.get('/', (request, response) => {
-  return listHeadController.handle(request, response);
-});
+headRoutes.patch('/', moveHeadController.handle);
+headRoutes.get('/', listHeadController.handle);
 
 export { headRoutes };

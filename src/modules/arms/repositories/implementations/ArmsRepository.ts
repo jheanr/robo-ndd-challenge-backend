@@ -6,18 +6,8 @@ import { IArmsRepository, IArmTypes, IMoveArmDTO } from '../IArmsRepository';
 class ArmsRepository implements IArmsRepository {
   private arms: Arms;
 
-  private static INSTANCE: ArmsRepository;
-
-  private constructor() {
+  constructor() {
     this.arms = new Arms();
-  }
-
-  public static getInstance(): ArmsRepository {
-    if (!ArmsRepository.INSTANCE) {
-      ArmsRepository.INSTANCE = new ArmsRepository();
-    }
-
-    return ArmsRepository.INSTANCE;
   }
 
   move({ arm, part, movement }: IMoveArmDTO): void {

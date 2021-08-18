@@ -1,13 +1,19 @@
+import { inject, injectable } from 'tsyringe';
+
 import { Head } from '../../models/Head';
 import { IHeadRepository } from '../../repositories/IHeadRepository';
 
+@injectable()
 class ListHeadUseCase {
-  constructor(private headRepository: IHeadRepository) {}
+  constructor(
+    @inject('HeadRepository')
+    private headRepository: IHeadRepository,
+  ) {}
 
   execute(): Head {
-    const head = this.headRepository.list();
+    const result = this.headRepository.list();
 
-    return head;
+    return result;
   }
 }
 

@@ -1,16 +1,17 @@
 import { Request, Response } from 'express';
+import { container } from 'tsyringe';
 
 import { MoveArmUseCase } from './MoveArmUseCase';
 
 class MoveArmController {
-  constructor(private moveArmUseCase: MoveArmUseCase) {}
-
   handle(request: Request, response: Response): Response {
     const { arm, part, movement } = request.body;
 
-    this.moveArmUseCase.execute({ arm, part, movement });
+    const moveArmUseCase = container.resolve(MoveArmUseCase);
 
-    return response.status(201).send();
+    moveArmUseCase.execute({ arm, part, movement });
+
+    return response.status(204).send();
   }
 }
 

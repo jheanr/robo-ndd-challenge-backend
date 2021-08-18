@@ -1,3 +1,5 @@
+import { inject, injectable } from 'tsyringe';
+
 import {
   IArmsRepository,
   IMoveArmDTO,
@@ -5,8 +7,12 @@ import {
 
 type IRequest = IMoveArmDTO;
 
+@injectable()
 class MoveArmUseCase {
-  constructor(private armsRepository: IArmsRepository) {}
+  constructor(
+    @inject('ArmsRepository')
+    private armsRepository: IArmsRepository,
+  ) {}
 
   execute({ arm, part, movement }: IRequest): void {
     if (!this.armsRepository.isValidMovement({ arm, part, movement })) {

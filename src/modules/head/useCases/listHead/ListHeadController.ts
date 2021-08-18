@@ -1,14 +1,15 @@
 import { Request, Response } from 'express';
+import { container } from 'tsyringe';
 
 import { ListHeadUseCase } from './ListHeadUseCase';
 
 class ListHeadController {
-  constructor(private listHeadUseCase: ListHeadUseCase) {}
-
   handle(request: Request, response: Response): Response {
-    const head = this.listHeadUseCase.execute();
+    const listHeadUseCase = container.resolve(ListHeadUseCase);
 
-    return response.json(head);
+    const result = listHeadUseCase.execute();
+
+    return response.json(result);
   }
 }
 
