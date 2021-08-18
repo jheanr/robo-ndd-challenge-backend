@@ -6,3 +6,4 @@
 - Eslint
 - Prettier
 - Tsyringe
+- Jest

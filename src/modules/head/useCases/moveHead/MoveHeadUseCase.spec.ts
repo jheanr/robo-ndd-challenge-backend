@@ -1,6 +1,7 @@
+import 'reflect-metadata';
+
 import { HeadRepository } from '@modules/head/repositories/implementations/HeadRepository';
 
-import 'reflect-metadata';
 import { MoveHeadUseCase } from './MoveHeadUseCase';
 
 let headRepository: HeadRepository;
@@ -15,29 +16,31 @@ describe('Move head', () => {
   it('Should be able to move the head to a new position.', () => {
     moveHeadUseCase.execute({
       action: 'inclination',
-      movement: 'para cima',
+      movement: 1,
     });
 
     const headPositions = headRepository.list();
 
-    const expectedResponse = {
+    const expectResult = {
       inclination: 'Para Cima',
+      inclination_position: 1,
       rotation: 'Em Repouso',
+      rotation_position: 3,
     };
 
-    expect(headPositions).toEqual(expectedResponse);
+    expect(headPositions).toEqual(expectResult);
   });
 
   it('Should not be able to skip the next or previous position while moving.', () => {
     expect(() => {
       moveHeadUseCase.execute({
         action: 'inclination',
-        movement: 'para cima',
+        movement: 1,
       });
 
       moveHeadUseCase.execute({
         action: 'inclination',
-        movement: 'para baixo',
+        movement: 3,
       });
     }).toThrow('Invalid head movement.');
   });
@@ -46,13 +49,27 @@ describe('Move head', () => {
     expect(() => {
       moveHeadUseCase.execute({
         action: 'inclination',
-        movement: 'para baixo',
+        movement: 3,
       });
 
       moveHeadUseCase.execute({
         action: 'rotation',
-        movement: 'rotação 45°',
+        movement: 2,
       });
     }).toThrow(`You can't rotate the head while its inclined this way.`);
+  });
+
+  it('Should not be able to move to an inexistent position.', () => {
+    expect(() => {
+      moveHeadUseCase.execute({
+        action: 'inclination',
+        movement: 3,
+      });
+
+      moveHeadUseCase.execute({
+        action: 'inclination',
+        movement: 4,
+      });
+    }).toThrow('Invalid head movement.');
   });
 });
