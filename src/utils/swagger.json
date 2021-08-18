@@ -1,0 +1,246 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "[R.O.B.O] Documentation",
+    "description": "This is an API for [R.O.B.O] challenge.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Jhean Ramos",
+      "email": "jheanr@gmail.com"
+    }
+  },
+  "paths": {
+    "/head": {
+      "post": {
+        "tags": ["Head"],
+        "summary": "Move the head",
+        "description": "Move the head to a new position. By default, both positions(<em>inclination, rotation</em>) starts in <code>em repouso</code>. Each movement must move to the next or previous position, so if the current <code>inclination</code> position is <code>para cima</code>, you're unable to move to <code>para baixo</code> in one request. See <code>schema</code> for details.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "action": {
+                    "type": "string",
+                    "description": "Acceptable values: <code>inclination, rotation</code>"
+                  },
+                  "movement": {
+                    "type": "string",
+                    "description": "Acceptable values: <pre>For <em>inclination</em> values: <code>para cima, em repouso, para baixo</code></pre><pre>For <em>rotation</em> values: <code>rotação -90°, rotação -45°, em repouso, rotação 45°, rotação 90°</code></pre>"
+                  }
+                }
+              },
+              "example": {
+                "action": "inclination",
+                "movement": "Para cima"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Head moved."
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [{
+                    "type": "string",
+                    "example": "Invalid head movement."
+                  }, {
+                    "type": "string",
+                    "example": "You can't rotate the head while its inclined this way."
+                  }]
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Head"],
+        "summary": "List head positions.",
+        "description": "List head positions(<em>inclination, rotation</em>) values.",
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "inclination": {
+                      "type": "string"
+                    },
+                    "rotation": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "inclination": "Em Repouso",
+                  "rotation": "Em Repouso"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/arms": {
+      "post": {
+        "tags": ["Arms"],
+        "summary": "Move the arm",
+        "description": "Move one arm to a new position. By default, both positions(<em>elbow, wrist</em>) starts in <code>em repouso</code>. Each movement must move to the next or previous position, so if the current <code>elbow</code> position is <code>contraído</code>, you're unable to move to <code>em repouso</code> in one request. See <code>schema</code> for details.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "arm": {
+                    "type": "string",
+                    "description": "Acceptable values: <code>left, right</code>"
+                  },
+                  "part": {
+                    "type": "string",
+                    "description": "Acceptable values: <code>elbow, wrist</code>"
+                  },
+                  "movement": {
+                    "type": "string",
+                    "description": "Acceptable values: <pre>For <em>elbow</em> values: <code>em repouso, levemente contraído, contraído, fortemente contraído</code></pre><pre>For <em>wrist</em> values: <code>rotação -90°, rotação -45°, em repouso, rotação 45°, rotação 90°, rotação 135°, rotação 180°</code></pre>"
+                  }
+                }
+              },
+              "example": {
+                "arm": "left",
+                "part": "elbow",
+                "movement": "levemente contraído"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Arm moved."
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [{
+                    "type": "string",
+                    "example": "Invalid arm movement."
+                  }, {
+                    "type": "string",
+                    "example": "You can't move the wrist with the current elbow position."
+                  }]
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Arms"],
+        "summary": "List arms positions.",
+        "description": "List arms positions values for each arm part.",
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "left": {
+                      "type": "object",
+                      "properties": {
+                        "elbow": {
+                          "type": "string"
+                        },
+                        "wrist": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "right": {
+                      "type": "object",
+                      "properties": {
+                        "elbow": {
+                          "type": "string"
+                        },
+                        "wrist": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "left": {
+                    "elbow": "Em Repouso",
+                    "wrist": "Em Repouso"
+                  },
+                  "right": {
+                    "elbow": "Em Repouso",
+                    "wrist": "Em Repouso"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/arms/{arm}": {
+      "get": {
+        "tags": ["Arms"],
+        "summary": "List arm positions.",
+        "description": "List arm positions values.",
+        "parameters": [
+          {
+            "name": "arm",
+            "in": "path",
+            "description": "Specify the arm to get the positions.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["left", "right"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "elbow": {
+                      "type": "string"
+                    },
+                    "wrist": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "elbow": "Em Repouso",
+                  "wrist": "Em Repouso"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
