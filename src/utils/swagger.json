@@ -43,18 +43,62 @@
           "204": {
             "description": "Head moved."
           },
-          "500": {
-            "description": "",
+          "400": {
+            "description": "Invalid head movement.",
             "content": {
               "application/json": {
                 "schema": {
                   "oneOf": [{
-                    "type": "string",
-                    "example": "Invalid head movement."
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string"
+                      },
+                      "message": {
+                        "type": "string"
+                      }
+                    },
+                    "example": {
+                      "status": "error",
+                      "message": "Invalid head movement."
+                    }
                   }, {
-                    "type": "string",
-                    "example": "You can't rotate the head while its inclined this way."
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string"
+                      },
+                      "message": {
+                        "type": "string"
+                      }
+                    },
+                    "example": {
+                      "status": "error",
+                      "message": "You can't rotate the head while its inclined this way."
+                    }
                   }]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": "error",
+                    "message": "Internal server error."
+                  }
                 }
               }
             }
@@ -129,18 +173,62 @@
           "204": {
             "description": "Arm moved."
           },
-          "500": {
-            "description": "",
+          "400": {
+            "description": "Invalid arm movement.",
             "content": {
               "application/json": {
                 "schema": {
                   "oneOf": [{
-                    "type": "string",
-                    "example": "Invalid arm movement."
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string"
+                      },
+                      "message": {
+                        "type": "string"
+                      }
+                    },
+                    "example": {
+                      "status": "error",
+                      "message": "Invalid arm movement."
+                    }
                   }, {
-                    "type": "string",
-                    "example": "You can't move the wrist with the current elbow position."
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string"
+                      },
+                      "message": {
+                        "type": "string"
+                      }
+                    },
+                    "example": {
+                      "status": "error",
+                      "message": "You can't move the wrist with the current elbow position."
+                    }
                   }]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": "error",
+                    "message": "Internal server error."
+                  }
                 }
               }
             }

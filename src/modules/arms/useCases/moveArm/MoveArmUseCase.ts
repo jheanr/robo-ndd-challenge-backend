@@ -1,5 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 
+import { AppError } from '../../../../shared/errors/AppError';
 import {
   IArmsRepository,
   IMoveArmDTO,
@@ -16,11 +17,11 @@ class MoveArmUseCase {
 
   execute({ arm, part, movement }: IRequest): void {
     if (!this.armsRepository.isValidMovement({ arm, part, movement })) {
-      throw new Error('Invalid arm movement.');
+      throw new AppError('Invalid arm movement.');
     }
 
     if (part === 'wrist' && !this.armsRepository.canMove(arm)) {
-      throw new Error(
+      throw new AppError(
         `You can't move the wrist with the current elbow position.`,
       );
     }
