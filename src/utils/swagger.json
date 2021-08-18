@@ -13,8 +13,8 @@
     "/head": {
       "patch": {
         "tags": ["Head"],
-        "summary": "Move the head",
-        "description": "Update the head position to a new one. By default, both positions(<em>inclination, rotation</em>) starts in <code>em repouso</code>. Each movement must move to the next or previous position, so if the current <code>inclination</code> position is <code>para cima</code>, you're unable to move to <code>para baixo</code> in one request. See <code>schema</code> for details.",
+        "summary": "Move head",
+        "description": "Update the head position to a new one. By default, both head positions(<em>inclination, rotation</em>) starts in <code>em repouso</code>. Each movement must move to the next or previous action position, so if the current <code>inclination</code> position is <code>para cima</code>, you're unable to move to <code>para baixo</code> in one request. See <code>schema</code> for details.",
         "requestBody": {
           "required": true,
           "content": {
@@ -24,17 +24,17 @@
                 "properties": {
                   "action": {
                     "type": "string",
-                    "description": "Acceptable values: <code>inclination, rotation</code>"
+                    "enum": ["inclination", "rotation"]
                   },
                   "movement": {
-                    "type": "string",
-                    "description": "Acceptable values: <pre>For <em>inclination</em> values: <code>para cima, em repouso, para baixo</code></pre><pre>For <em>rotation</em> values: <code>rotação -90°, rotação -45°, em repouso, rotação 45°, rotação 90°</code></pre>"
+                    "type": "number",
+                    "description": "Acceptable values(number only): <pre>For <em>inclination</em> values: <ul><li>1 (para cima)</li><li>2 (em repouso)</li><li>3 (para baixo)</li></ul></pre><pre>For <em>rotation</em> values:<ul><li>1 (rotação -90°)</li><li>2 (rotação -45°)</li><li>3 (em repouso)</li><li>4 (rotação 45°)</li><li>5 (rotação 90°)</li></ul></pre>"
                   }
                 }
               },
               "example": {
                 "action": "inclination",
-                "movement": "Para cima"
+                "movement": 1
               }
             }
           }
@@ -120,14 +120,22 @@
                     "inclination": {
                       "type": "string"
                     },
+                    "inclination_position": {
+                      "type": "number"
+                    },
                     "rotation": {
                       "type": "string"
+                    },
+                    "rotation_position": {
+                      "type": "number"
                     }
                   }
                 },
                 "example": {
                   "inclination": "Em Repouso",
-                  "rotation": "Em Repouso"
+                  "inclination_position": 2,
+                  "rotation": "Em Repouso",
+                  "rotation_position": 3
                 }
               }
             }
@@ -138,8 +146,8 @@
     "/arms": {
       "patch": {
         "tags": ["Arms"],
-        "summary": "Move the arm",
-        "description": "Move one arm to a new position. By default, both positions(<em>elbow, wrist</em>) starts in <code>em repouso</code>. Each movement must move to the next or previous position, so if the current <code>elbow</code> position is <code>contraído</code>, you're unable to move to <code>em repouso</code> in one request. See <code>schema</code> for details.",
+        "summary": "Move arm",
+        "description": "Move one arm to a new position. By default, both arm parts positions(<em>elbow, wrist</em>) starts in <code>em repouso</code>. Each movement must move to the next or previous arm part position, so if the current <code>elbow</code> position is <code>contraído</code>, you're unable to move to <code>em repouso</code> in one request. See <code>schema</code> for details.",
         "requestBody": {
           "required": true,
           "content": {
@@ -164,7 +172,7 @@
               "example": {
                 "arm": "left",
                 "part": "elbow",
-                "movement": "levemente contraído"
+                "movement": 2
               }
             }
           }
@@ -253,8 +261,14 @@
                         "elbow": {
                           "type": "string"
                         },
+                        "elbow_position": {
+                          "type": "number"
+                        },
                         "wrist": {
                           "type": "string"
+                        },
+                        "wrist_position": {
+                          "type": "number"
                         }
                       }
                     },
@@ -264,8 +278,14 @@
                         "elbow": {
                           "type": "string"
                         },
+                        "elbow_position": {
+                          "type": "number"
+                        },
                         "wrist": {
                           "type": "string"
+                        },
+                        "wrist_position": {
+                          "type": "number"
                         }
                       }
                     }
@@ -274,11 +294,15 @@
                 "example": {
                   "left": {
                     "elbow": "Em Repouso",
-                    "wrist": "Em Repouso"
+                    "elbow_position": 1,
+                    "wrist": "Em Repouso",
+                    "wrist_position": 3
                   },
                   "right": {
                     "elbow": "Em Repouso",
-                    "wrist": "Em Repouso"
+                    "elbow_position": 1,
+                    "wrist": "Em Repouso",
+                    "wrist_position": 3
                   }
                 }
               }
@@ -315,14 +339,22 @@
                     "elbow": {
                       "type": "string"
                     },
+                    "elbow_position": {
+                      "type": "number"
+                    },
                     "wrist": {
                       "type": "string"
+                    },
+                    "wrist_position": {
+                      "type": "number"
                     }
                   }
                 },
                 "example": {
                   "elbow": "Em Repouso",
-                  "wrist": "Em Repouso"
+                  "elbow_position": 1,
+                  "wrist": "Em Repouso",
+                  "wrist_position": 3
                 }
               }
             }
