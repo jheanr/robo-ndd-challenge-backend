@@ -1,8 +1,8 @@
 class Head {
-  inclination?: string;
-  inclination_position?: number;
-  rotation?: string;
-  rotation_position?: number;
+  inclination: string;
+  inclination_position: number;
+  rotation: string;
+  rotation_position: number;
 
   constructor() {
     if (!this.inclination) {

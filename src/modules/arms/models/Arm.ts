@@ -1,8 +1,8 @@
 class Arm {
-  elbow?: string;
-  elbow_position?: number;
-  wrist?: string;
-  wrist_position?: number;
+  elbow: string;
+  elbow_position: number;
+  wrist: string;
+  wrist_position: number;
 
   constructor() {
     if (!this.elbow) {
