@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
-import { ListHeadController } from '../modules/head/useCases/listHead/ListHeadController';
-import { MoveHeadController } from '../modules/head/useCases/moveHead/MoveHeadController';
+import { ListHeadController } from '@modules/head/useCases/listHead/ListHeadController';
+import { MoveHeadController } from '@modules/head/useCases/moveHead/MoveHeadController';
 
 const headRoutes = Router();
 

@@ -1,5 +1,6 @@
-import { movements } from '../../../../utils/movements';
-import { Head } from '../../models/Head';
+import { Head } from '@modules/head/models/Head';
+import { movements } from '@utils/movements';
+
 import { IHeadRepository, IMoveHeadDTO } from '../IHeadRepository';
 
 class HeadRepository implements IHeadRepository {
@@ -10,9 +11,10 @@ class HeadRepository implements IHeadRepository {
   }
 
   move({ action, movement }: IMoveHeadDTO): void {
-    this.head[action] = movements.head[action].find(
-      position => position.toLowerCase() === movement.toLowerCase(),
-    );
+    const movementIndex = movement - 1;
+
+    this.head[action] = movements.head[action][movementIndex];
+    this.head[`${action}_position`] = movement;
   }
 
   list(): Head {
@@ -20,20 +22,17 @@ class HeadRepository implements IHeadRepository {
   }
 
   isValidMovement({ action, movement }: IMoveHeadDTO): boolean {
-    if (!this.head[action] || !movements.head[action]) {
+    if (
+      !this.head[action] ||
+      !movements.head[action] ||
+      !movements.head[action][movement - 1] ||
+      typeof movement !== 'number'
+    ) {
       return false;
     }
 
-    const headMovementToCheck = movements.head[action];
-    const headPositionToCheck = this.head[action];
-
-    const currentHeadPosition = headMovementToCheck.findIndex(
-      position => position === headPositionToCheck,
-    );
-
-    const nextHeadPosition = headMovementToCheck.findIndex(
-      position => position.toLowerCase() === movement.toLowerCase(),
-    );
+    const currentHeadPosition = this.head[`${action}_position`];
+    const nextHeadPosition = movement;
 
     if (Math.abs(currentHeadPosition - nextHeadPosition) > 1) {
       return false;
@@ -43,7 +42,9 @@ class HeadRepository implements IHeadRepository {
   }
 
   canRotate(): boolean {
-    if (this.head.inclination === 'Para Baixo') {
+    const positionToValidate = 'Para Baixo';
+
+    if (this.head.inclination === positionToValidate) {
       return false;
     }
 

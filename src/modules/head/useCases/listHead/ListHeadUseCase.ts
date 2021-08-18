@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 
-import { Head } from '../../models/Head';
-import { IHeadRepository } from '../../repositories/IHeadRepository';
+import { Head } from '@modules/head/models/Head';
+import { IHeadRepository } from '@modules/head/repositories/IHeadRepository';
 
 @injectable()
 class ListHeadUseCase {

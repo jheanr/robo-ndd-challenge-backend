@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
+import { IMoveHeadDTO } from '@modules/head/repositories/IHeadRepository';
+
 import { MoveHeadUseCase } from './MoveHeadUseCase';
 
 class MoveHeadController {

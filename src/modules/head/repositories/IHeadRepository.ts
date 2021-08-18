@@ -4,7 +4,7 @@ type IActionTypes = 'inclination' | 'rotation';
 
 interface IMoveHeadDTO {
   action: IActionTypes;
-  movement: string;
+  movement: number;
 }
 
 interface IHeadRepository {

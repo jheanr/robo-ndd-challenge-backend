@@ -1,10 +1,10 @@
 import { inject, injectable } from 'tsyringe';
 
-import { AppError } from '../../../../shared/errors/AppError';
 import {
   IHeadRepository,
   IMoveHeadDTO,
-} from '../../repositories/IHeadRepository';
+} from '@modules/head/repositories/IHeadRepository';
+import { AppError } from '@shared/errors/AppError';
 
 type IRequest = IMoveHeadDTO;
 

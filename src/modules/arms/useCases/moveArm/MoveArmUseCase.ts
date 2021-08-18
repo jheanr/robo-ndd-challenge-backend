@@ -1,10 +1,10 @@
 import { inject, injectable } from 'tsyringe';
 
-import { AppError } from '../../../../shared/errors/AppError';
 import {
   IArmsRepository,
   IMoveArmDTO,
-} from '../../repositories/IArmsRepository';
+} from '@modules/arms/repositories/IArmsRepository';
+import { AppError } from '@shared/errors/AppError';
 
 type IRequest = IMoveArmDTO;
 

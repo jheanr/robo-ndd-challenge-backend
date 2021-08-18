@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import { IArmTypes } from '../../repositories/IArmsRepository';
+import { IArmTypes } from '@modules/arms/repositories/IArmsRepository';
+
 import { ListByArmUseCase } from './ListByArmUseCase';
 
 interface IParams {

@@ -8,7 +8,7 @@ type IArmParts = 'elbow' | 'wrist';
 interface IMoveArmDTO {
   arm: IArmTypes;
   part: IArmParts;
-  movement: string;
+  movement: number;
 }
 
 interface IArmsRepository {

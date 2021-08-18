@@ -1,8 +1,8 @@
 import { Router } from 'express';
 
-import { ListArmsController } from '../modules/arms/useCases/listArms/ListArmsController';
-import { ListByArmController } from '../modules/arms/useCases/listByArm/ListByArmController';
-import { MoveArmController } from '../modules/arms/useCases/moveArm/MoveArmController';
+import { ListArmsController } from '@modules/arms/useCases/listArms/ListArmsController';
+import { ListByArmController } from '@modules/arms/useCases/listByArm/ListByArmController';
+import { MoveArmController } from '@modules/arms/useCases/moveArm/MoveArmController';
 
 const armsRoutes = Router();
 

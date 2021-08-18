@@ -1,6 +1,7 @@
-import { movements } from '../../../../utils/movements';
-import { Arm } from '../../models/Arm';
-import { Arms } from '../../models/Arms';
+import { Arm } from '@modules/arms/models/Arm';
+import { Arms } from '@modules/arms/models/Arms';
+import { movements } from '@utils/movements';
+
 import { IArmsRepository, IArmTypes, IMoveArmDTO } from '../IArmsRepository';
 
 class ArmsRepository implements IArmsRepository {
@@ -11,9 +12,10 @@ class ArmsRepository implements IArmsRepository {
   }
 
   move({ arm, part, movement }: IMoveArmDTO): void {
-    this.arms[arm][part] = movements.arm[part].find(
-      position => position.toLowerCase() === movement.toLowerCase(),
-    );
+    const movementIndex = movement - 1;
+
+    this.arms[arm][part] = movements.arm[part][movementIndex];
+    this.arms[arm][`${part}_position`] = movement;
   }
 
   list(): Arms {
@@ -25,28 +27,18 @@ class ArmsRepository implements IArmsRepository {
   }
 
   isValidMovement({ arm, part, movement }: IMoveArmDTO): boolean {
-    if (!this.arms[arm] || !this.arms[arm][part] || !movements.arm[part]) {
-      return false;
-    }
-
     if (
-      !movements.arm[part].some(
-        position => position.toLowerCase() === movement.toLowerCase(),
-      )
+      !this.arms[arm] ||
+      !this.arms[arm][part] ||
+      !movements.arm[part] ||
+      !movements.arm[part][movement - 1] ||
+      typeof movement !== 'number'
     ) {
       return false;
     }
 
-    const armPartToCheck = movements.arm[part];
-    const armPartPositionToCheck = this.arms[arm][part];
-
-    const currentArmPartPosition = armPartToCheck.findIndex(
-      position => position === armPartPositionToCheck,
-    );
-
-    const nextArmPartPosition = armPartToCheck.findIndex(
-      position => position.toLowerCase() === movement.toLowerCase(),
-    );
+    const currentArmPartPosition = this.arms[arm][`${part}_position`];
+    const nextArmPartPosition = movement;
 
     if (Math.abs(currentArmPartPosition - nextArmPartPosition) > 1) {
       return false;
@@ -56,7 +48,9 @@ class ArmsRepository implements IArmsRepository {
   }
 
   canMove(arm: IArmTypes): boolean {
-    if (this.arms[arm].elbow !== 'Fortemente Contraído') {
+    const positionToValidate = 'Fortemente Contraído';
+
+    if (this.arms[arm].elbow !== positionToValidate) {
       return false;
     }
 

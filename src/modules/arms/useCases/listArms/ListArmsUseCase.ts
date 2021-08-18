@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 
-import { Arms } from '../../models/Arms';
-import { IArmsRepository } from '../../repositories/IArmsRepository';
+import { Arms } from '@modules/arms/models/Arms';
+import { IArmsRepository } from '@modules/arms/repositories/IArmsRepository';
 
 @injectable()
 class ListArmsUseCase {
