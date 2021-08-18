@@ -157,15 +157,15 @@
                 "properties": {
                   "arm": {
                     "type": "string",
-                    "description": "Acceptable values: <code>left, right</code>"
+                    "enum": ["left", "right"]
                   },
                   "part": {
                     "type": "string",
-                    "description": "Acceptable values: <code>elbow, wrist</code>"
+                    "enum": ["elbow", "wrist"]
                   },
                   "movement": {
-                    "type": "string",
-                    "description": "Acceptable values: <pre>For <em>elbow</em> values: <code>em repouso, levemente contraído, contraído, fortemente contraído</code></pre><pre>For <em>wrist</em> values: <code>rotação -90°, rotação -45°, em repouso, rotação 45°, rotação 90°, rotação 135°, rotação 180°</code></pre>"
+                    "type": "number",
+                    "description": "Acceptable values(number only): <pre>For <em>elbow</em> values: <ul><li>1 (em repouso)</li><li>2 (levemente contraído)</li><li>3 (contraído)</li><li>4 (fortemente contraído)</li></ul></pre><pre>For <em>wrist</em> values: <ul><li>1 (rotação -90°)</li><li>2 (rotação -45°)</li><li>3 (em repouso)</li><li>4 (rotação 45°)</li><li>5 (rotação 90°)</li><li>6 (rotação 135°)</li><li>7 (rotação 180°)</li></ul></pre>"
                   }
                 }
               },
