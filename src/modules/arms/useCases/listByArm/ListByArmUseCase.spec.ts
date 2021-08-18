@@ -13,7 +13,7 @@ describe('List arm', () => {
     listByArmUseCase = new ListByArmUseCase(armsRepository);
   });
 
-  it('Should be able to list arms positions.', () => {
+  it('Should be able to list arm parts positions.', () => {
     const result = listByArmUseCase.execute('left');
 
     const expectResult = {

@@ -6,6 +6,7 @@
     "baseUrl": "./src", 
     "paths": {
       "@modules/*": ["modules/*"],
+      "@root/*": ["*"],
       "@shared/*": ["shared/*"],
       "@utils/*": ["utils/*"]
     }, 
