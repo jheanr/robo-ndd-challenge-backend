@@ -74,7 +74,7 @@
                     },
                     "example": {
                       "status": "error",
-                      "message": "You can't rotate the head while its inclined this way."
+                      "message": "You can't rotate the head with the current inclination position."
                     }
                   }]
                 }

@@ -56,7 +56,9 @@ describe('Move head', () => {
         action: 'rotation',
         movement: 2,
       });
-    }).toThrow(`You can't rotate the head while its inclined this way.`);
+    }).toThrow(
+      `You can't rotate the head with the current inclination position.`,
+    );
   });
 
   it('Should not be able to move to an inexistent position.', () => {

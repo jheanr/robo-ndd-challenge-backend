@@ -22,7 +22,7 @@ class MoveHeadUseCase {
 
     if (action === 'rotation' && !this.headRepository.canRotate()) {
       throw new AppError(
-        `You can't rotate the head while its inclined this way.`,
+        `You can't rotate the head with the current inclination position.`,
       );
     }
 
