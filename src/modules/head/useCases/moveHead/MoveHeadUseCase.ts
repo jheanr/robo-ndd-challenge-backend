@@ -1,5 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 
+import { Head } from '@modules/head/models/Head';
 import {
   IHeadRepository,
   IMoveHeadDTO,
@@ -15,7 +16,7 @@ class MoveHeadUseCase {
     private headRepository: IHeadRepository,
   ) {}
 
-  execute({ action, movement }: IRequest): void {
+  execute({ action, movement }: IRequest): Head {
     if (!this.headRepository.isValidMovement({ action, movement })) {
       throw new AppError('Invalid head movement.');
     }
@@ -27,6 +28,8 @@ class MoveHeadUseCase {
     }
 
     this.headRepository.move({ action, movement });
+
+    return this.headRepository.list();
   }
 }
 

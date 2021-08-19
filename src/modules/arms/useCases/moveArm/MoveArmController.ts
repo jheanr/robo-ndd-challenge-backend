@@ -9,9 +9,9 @@ class MoveArmController {
 
     const moveArmUseCase = container.resolve(MoveArmUseCase);
 
-    moveArmUseCase.execute({ arm, part, movement });
+    const result = moveArmUseCase.execute({ arm, part, movement });
 
-    return response.status(204).send();
+    return response.status(200).json(result);
   }
 }
 

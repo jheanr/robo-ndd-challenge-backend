@@ -1,5 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 
+import { Arm } from '@modules/arms/models/Arm';
 import {
   IArmsRepository,
   IMoveArmDTO,
@@ -15,7 +16,7 @@ class MoveArmUseCase {
     private armsRepository: IArmsRepository,
   ) {}
 
-  execute({ arm, part, movement }: IRequest): void {
+  execute({ arm, part, movement }: IRequest): Arm {
     if (!this.armsRepository.isValidMovement({ arm, part, movement })) {
       throw new AppError('Invalid arm movement.');
     }
@@ -27,6 +28,8 @@ class MoveArmUseCase {
     }
 
     this.armsRepository.move({ arm, part, movement });
+
+    return this.armsRepository.getByArm(arm);
   }
 }
 

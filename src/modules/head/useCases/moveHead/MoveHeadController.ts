@@ -1,8 +1,6 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import { IMoveHeadDTO } from '@modules/head/repositories/IHeadRepository';
-
 import { MoveHeadUseCase } from './MoveHeadUseCase';
 
 class MoveHeadController {
@@ -11,9 +9,9 @@ class MoveHeadController {
 
     const moveHeadService = container.resolve(MoveHeadUseCase);
 
-    moveHeadService.execute({ action, movement });
+    const result = moveHeadService.execute({ action, movement });
 
-    return response.status(204).send();
+    return response.status(200).json(result);
   }
 }
 

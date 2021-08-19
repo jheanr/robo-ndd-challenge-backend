@@ -8,3 +8,4 @@
 - Tsyringe
 - Jest
 - Swagger
+- Supertest
