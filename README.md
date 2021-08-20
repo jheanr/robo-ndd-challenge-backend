@@ -14,7 +14,7 @@ This is an API for [R.O.B.O] challenge by NDD which you can simulate sending com
 
 The documentation was created using Swagger, [click here](https://robo-challenge.herokuapp.com/api-docs/) to access.
 
-## Techonologies
+## Technologies
 
 - Node
 - Express
