@@ -1,6 +1,6 @@
 ## Project
 
-This is an API for [R.O.B.O] challenge by NDD which you can simulate sending commands to a robot to execute. See [documentation](#documentation) to details.
+This is an API for [R.O.B.O] challenge by NDD which you can simulate sending commands to a robot to execute. You can accees the front-end project [here](https://github.com/jheanr/robo-ndd-challenge-frontend). See [documentation](#documentation) to details.
 
 <p>
   <a href="#documentation">Documentation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
