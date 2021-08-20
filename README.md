@@ -12,7 +12,7 @@ This is an API for [R.O.B.O] challenge by NDD which you can simulate sending com
 
 ## Documentation
 
-The documentation was created using Swagger, [click here](https://robo-challenge.herokuapp.com/api-docs/) to access.
+The documentation was created using Swagger, [click here](https://robo-challenge.herokuapp.com/api-docs/) to access an online version. If you're running locally this project, the address is `/api-docs`.
 
 ## Technologies
 
