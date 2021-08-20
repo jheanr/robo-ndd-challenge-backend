@@ -19,12 +19,12 @@ The documentation was created using Swagger, [click here](https://robo-challenge
 - Node
 - Express
 - Typescript
+- Tsyringe
+- Swagger
+- Jest
+- Supertest
 - Eslint
 - Prettier
-- Tsyringe
-- Jest
-- Swagger
-- Supertest
 
 ## How to use
 
